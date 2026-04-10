@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+._*
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+
+# Test artifacts
+/tmp/
+
+# Plugin data (managed by Claude Code runtime)
+session-state*.json
