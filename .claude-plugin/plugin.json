@@ -1,0 +1,8 @@
+{
+  "name": "cc-timestamps",
+  "version": "1.0.0",
+  "description": "Displays timestamps on every message with retro IM styling, duration tracking, and session statistics",
+  "author": {
+    "name": "seannam"
+  }
+}
