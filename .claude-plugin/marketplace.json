@@ -1,0 +1,31 @@
+{
+  "name": "cc-timestamps",
+  "metadata": {
+    "description": "A marketplace containing the cc-timestamps plugin for Claude Code."
+  },
+  "source": {
+    "source": "github",
+    "repo": "seannam/cc-timestamps"
+  },
+  "owner": {
+    "name": "seannam"
+  },
+  "repository": "https://github.com/seannam/cc-timestamps",
+  "license": "MIT",
+  "keywords": ["timestamps", "retro-im", "session-stats", "duration"],
+  "plugins": [
+    {
+      "name": "cc-timestamps",
+      "description": "Displays timestamps on every message with retro IM styling, duration tracking, and session statistics",
+      "version": "1.0.0",
+      "author": {
+        "name": "seannam"
+      },
+      "source": "./plugins/cc-timestamps",
+      "category": "productivity",
+      "keywords": ["timestamps", "retro-im", "duration", "stats"],
+      "tags": ["timestamps", "productivity", "ux"],
+      "strict": false
+    }
+  ]
+}
