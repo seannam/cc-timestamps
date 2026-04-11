@@ -86,9 +86,18 @@ main() {
   )"
   write_state "$session_id" "$new_state"
 
-  # Build banner
-  local banner
-  banner="$(format_banner "$theme" "$time_str" "$date_str" "$show_date" "claude" "$duration_str" "$stats_str")"
+  # Build the "claude:" banner for the response that just finished.
+  local claude_banner
+  claude_banner="$(format_banner "$theme" "$time_str" "$date_str" "$show_date" "claude" "$duration_str" "$stats_str")"
+
+  # Build the "you:" banner that will visually sit above the user's next
+  # message. Uses the current time (Stop time) -- close enough to when the
+  # user will type next, and ensures the label appears *before* the message.
+  local you_banner
+  you_banner="$(format_banner "$theme" "$time_str" "$date_str" "$show_date" "you")"
+
+  # Combine into a single systemMessage line.
+  local banner="${claude_banner} ${you_banner}"
 
   # Output systemMessage
   jq -n --arg msg "$banner" '{"systemMessage": $msg}'

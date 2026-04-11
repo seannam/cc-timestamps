@@ -141,28 +141,25 @@ format_banner() {
 
   local stats_line=""
   if [[ -n "$stats_str" ]]; then
-    stats_line="\n${stats_str}"
+    stats_line=" ${stats_str}"
   fi
 
   case "$theme" in
     retro-im)
-      echo -e "........................................\n[${timestamp}] ${role}:${suffix}${stats_line}"
+      echo -n "[${timestamp}] ${role}:${suffix}${stats_line}"
       ;;
     minimal)
-      echo -e "-- ${timestamp} | ${role}${suffix} --${stats_line}"
+      echo -n "-- ${timestamp} | ${role}${suffix} --${stats_line}"
       ;;
     boxed)
-      local inner="${timestamp} | ${role}${suffix}"
-      local border
-      border=$(printf '%*s' $(( ${#inner} + 4 )) '' | tr ' ' '-')
-      echo -e "+${border}+\n|  ${inner}  |\n+${border}+${stats_line}"
+      echo -n "[ ${timestamp} | ${role}${suffix} ]${stats_line}"
       ;;
     plain)
-      echo -e "${timestamp} ${role}${suffix}${stats_line}"
+      echo -n "${timestamp} ${role}${suffix}${stats_line}"
       ;;
     *)
       # Fall back to retro-im
-      echo -e "........................................\n[${timestamp}] ${role}:${suffix}${stats_line}"
+      echo -n "[${timestamp}] ${role}:${suffix}${stats_line}"
       ;;
   esac
 }

@@ -1,6 +1,9 @@
 #!/bin/bash
 # on-prompt.sh - UserPromptSubmit hook for cc-timestamps
-# Injects a timestamp banner when the user sends a message.
+# State-only: records the prompt epoch for duration tracking in the Stop hook.
+# No visible banner is emitted here -- the Stop hook renders both the "claude:"
+# and "you:" timestamps so the "you:" label visually sits above the next
+# user message instead of below the current one.
 
 set -euo pipefail
 
@@ -14,21 +17,6 @@ main() {
 
   local session_id
   session_id="$(echo "$input" | jq -r '.session_id // "default"')"
-
-  # Load config
-  local config
-  config="$(load_config)"
-
-  local time_fmt date_fmt show_date theme
-  time_fmt="$(cfg_get time_format "$config")"
-  date_fmt="$(cfg_get date_format "$config")"
-  show_date="$(cfg_get show_date "$config")"
-  theme="$(cfg_get theme "$config")"
-
-  # Format current time
-  local time_str date_str
-  time_str="$(format_time "$time_fmt")"
-  date_str="$(format_date "$date_fmt")"
 
   # Record prompt timestamp in state
   local epoch
@@ -56,12 +44,8 @@ main() {
   )"
   write_state "$session_id" "$new_state"
 
-  # Build banner
-  local banner
-  banner="$(format_banner "$theme" "$time_str" "$date_str" "$show_date" "you")"
-
-  # Output systemMessage
-  jq -n --arg msg "$banner" '{"systemMessage": $msg}'
+  # No visible output -- emit empty JSON so Claude Code shows nothing.
+  echo '{}'
 }
 
 main
