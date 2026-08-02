@@ -12,3 +12,6 @@
 
 # Plugin data (managed by Claude Code runtime)
 session-state*.json
+
+# Agentic coaching tool artifacts
+.claude/coaching/
